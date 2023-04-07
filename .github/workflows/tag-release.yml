@@ -56,7 +56,8 @@ jobs:
 
     - name: Update AUTHORS
       run: |
-        npm run authors
+        # git shortlog won't output by default with no terminal...
+        git log | git shortlog -s | cut -c8- | sort -f > AUTHORS
         git add AUTHORS
 
     - name: Commit update to branch

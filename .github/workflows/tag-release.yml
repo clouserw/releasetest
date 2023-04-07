@@ -54,6 +54,11 @@ jobs:
           fi
         done
 
+    - name: Update AUTHORS
+      run: |
+        npm run authors
+        git add AUTHORS
+
     - name: Commit update to branch
       run: |
         git commit --message "Release ${{ github.event.inputs.versionName }}"

@@ -65,6 +65,6 @@ jobs:
         git push origin v1.${{ github.event.inputs.versionName }}.0
 
     - name: Create pull request into main
-      run: gh pr create -B main -H train-${{ github.event.inputs.versionName }} --body "Merge train branch back to main"
+      run: gh pr create -B main -H train-${{ github.event.inputs.versionName }} --fill
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

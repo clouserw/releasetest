@@ -7,7 +7,7 @@ on:
         required: true
 permissions: {}
 jobs:
-  createrelease:
+  tagrelease:
     permissions:
       contents: write      # To update versions
       pull-requests: write # To make PR
@@ -30,24 +30,11 @@ jobs:
         git config user.email "noreply@github.com"
     - name: Update package versions
       run: |
-        TARGETS="packages/fxa-auth-server
-        packages/fxa-admin-server
-        packages/fxa-admin-panel
-        packages/fxa-content-server
-        packages/fxa-customs-server
-        packages/fxa-event-broker
-        packages/fxa-geodb
-        packages/fxa-graphql-api
-        packages/fxa-payments-server
-        packages/fxa-profile-server
-        packages/fxa-react
-        packages/fxa-settings
-        packages/fxa-shared
-        packages/fxa-support-panel"
+        TARGETS="packages/fxa-auth-server packages/fxa-admin-server packages/fxa-admin-panel packages/fxa-content-server packages/fxa-customs-server packages/fxa-event-broker packages/fxa-geodb packages/fxa-graphql-api packages/fxa-payments-server packages/fxa-profile-server packages/fxa-react packages/fxa-settings packages/fxa-shared packages/fxa-support-panel"
 
         for TARGET in $TARGETS; do
           if [ -f "$TARGET/package.json" ]; then
-            jq '.version="${{ github.event.inputs.versioncode }}"' $TARGET/package.json > $TARGET/pacakage.json.new
+            jq '.version="1.${{ github.event.inputs.versioncode }}.0"' $TARGET/package.json > $TARGET/pacakage.json.new
             mv $TARGET/pacakage.json.new $TARGET/package.json
             git add $TARGET/package.json
           fi

@@ -48,7 +48,7 @@ jobs:
 
         echo "1"
         for TARGET in $TARGETS; do
-          echo "2"
+          echo "2: $TARGET/package.json"
           if [ -f "$TARGET/package.json" ]; then
             echo "3"
             jq '.version="1.${{ github.event.inputs.versionName }}.0"' $TARGET/package.json > $TARGET/pacakage.json.new

@@ -46,11 +46,8 @@ jobs:
         packages/fxa-shared
         packages/fxa-support-panel"
 
-        echo "1"
         for TARGET in $TARGETS; do
-          echo "2: $TARGET/package.json -"
           if [ -f "$TARGET/package.json" ]; then
-            echo "3"
             jq '.version="1.${{ github.event.inputs.versionName }}.0"' $TARGET/package.json > $TARGET/pacakage.json.new
             mv $TARGET/pacakage.json.new $TARGET/package.json
             git add $TARGET/package.json
@@ -64,7 +61,7 @@ jobs:
 
     - name: Make a new tag
       run: |
-        git tag -a "${{ github.event.inputs.versionName }}"
+        git tag -a "${{ github.event.inputs.versionName }}" -m "Train release ${{ github.event.inputs.versionName }}"
         git push origin v1.${{ github.event.inputs.versionName }}.0
 
     - name: Create pull request into main

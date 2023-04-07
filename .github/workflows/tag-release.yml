@@ -30,7 +30,7 @@ jobs:
         git config user.email "noreply@github.com"
     - name: Update package versions
       run: |
-        IFS="\n"
+        IFS=$'\n'
         TARGETS="packages/fxa-auth-server
         packages/fxa-admin-server
         packages/fxa-admin-panel

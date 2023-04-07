@@ -46,9 +46,12 @@ jobs:
         packages/fxa-shared
         packages/fxa-support-panel"
 
+        echo "1"
         for TARGET in $TARGETS; do
+          echo "2"
           if [ -f "$TARGET/package.json" ]; then
-            jq '.version="1.${{ github.event.inputs.versioncode }}.0"' $TARGET/package.json > $TARGET/pacakage.json.new
+            echo "3"
+            jq '.version="1.${{ github.event.inputs.versionName }}.0"' $TARGET/package.json > $TARGET/pacakage.json.new
             mv $TARGET/pacakage.json.new $TARGET/package.json
             git add $TARGET/package.json
           fi

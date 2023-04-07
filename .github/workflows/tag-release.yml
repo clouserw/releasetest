@@ -61,7 +61,7 @@ jobs:
 
     - name: Make a new tag
       run: |
-        git tag -a "${{ github.event.inputs.versionName }}" -m "Train release ${{ github.event.inputs.versionName }}"
+        git tag -a "v1.${{ github.event.inputs.versionName }}.0" -m "Train release ${{ github.event.inputs.versionName }}"
         git push origin v1.${{ github.event.inputs.versionName }}.0
 
     - name: Create pull request into main
